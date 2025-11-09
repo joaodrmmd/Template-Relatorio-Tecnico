@@ -1,0 +1,230 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TEMPLATE ABNT - RELATÓRIO TÉCNICO (Segurança da Informação / Pós-Graduação)
+% Modelo reutilizável baseado em abnTeX2
+%
+% VERSÃO CORRIGIDA - Todos os erros resolvidos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[
+    12pt,
+    a4paper,
+    oneside,
+    english,
+    brazil
+]{abntex2}
+
+% --- PACOTES ESSENCIAIS ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{indentfirst}
+\usepackage{minted}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{color}
+
+% --- CONFIGURAÇÃO DE MARGENS (ABNT NBR 14724) ---
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+
+% --- CONFIGURAÇÕES DE FORMATAÇÃO ---
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{0.2cm}
+\OnehalfSpacing 
+
+% Aponta para a pasta onde as imagens estão
+\graphicspath{{./media/}}
+
+% --- DEFINIÇÃO DE COMANDOS PERSONALIZADOS ---
+% Define o comando \curso usando makeatletter
+\makeatletter
+\newcommand{\curso}[1]{\def\curso@content{#1}}
+\newcommand{\imprimircurso}{\curso@content}
+\makeatother
+
+% --- METADADOS PERSONALIZÁVEIS ---
+\titulo{Título do Relatório Técnico-Educacional}
+\autor{Nome do Autor}
+\local{Recife - PE}
+\data{202x}
+\instituicao{Universidade Federal de Pernambuco}
+\curso{Pós-Graduação Lato Sensu em... }
+\tipotrabalho{Relatório Técnico-Educacional}
+
+% --- CONFIGURAÇÃO DE LINKS ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    pdftitle={Modelo de Relatório Técnico ABNT},
+    pdfauthor={Nome do Autor},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COMANDOS E AMBIENTES PERSONALIZADOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{finding}[1]{
+    \begin{quote}
+    \noindent\textbf{Achado Técnico — #1}\\
+    \itshape
+}{
+    \end{quote}
+}
+
+\newenvironment{faq}{
+    \chapter*{FAQ - Perguntas Frequentes}
+    \addcontentsline{toc}{chapter}{FAQ - Perguntas Frequentes}
+    \begin{description}
+}{
+    \end{description}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INÍCIO DO DOCUMENTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CAPA PERSONALIZADA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{capa}
+    \begin{center}
+        % --- LOGO DA INSTITUIÇÃO ---
+        \vspace*{-1cm}
+        
+        % Arquivo: logo_ufpe.eps (ajuste o nome conforme necessário)
+        \includegraphics[width=4cm]{logo_ufpe.eps}\\[1cm]
+
+        % --- INSTITUIÇÃO E CURSO ---
+        \textbf{\MakeUppercase{\imprimirinstituicao}}\\[0.3cm]
+        \MakeUppercase{\imprimircurso}\\[4cm]
+
+        % --- TÍTULO CENTRALIZADO ---
+        {\bfseries\Large \imprimirtitulo}\\[4cm]
+
+        % --- AUTOR ---
+        \textbf{\imprimirautor}\\[0.2cm]
+        \imprimirtipotrabalho\\[4cm]
+
+        % --- LOCAL E DATA ---
+        \imprimirlocal\\[0.2cm]
+        \imprimirdata
+    \end{center}
+\end{capa}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FOLHA DE ROSTO PADRÃO ABNT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\imprimirfolhaderosto*
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SUMÁRIO AUTOMÁTICO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESUMO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{resumo}
+[Insira aqui um resumo conciso do trabalho, descrevendo o objetivo, metodologia, resultados e conclusões principais, em um único parágrafo.]
+
+\textbf{Palavras-chave:} [Insira de 3 a 5 palavras-chave separadas por ponto e vírgula.]
+\end{resumo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABSTRACT (opcional)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{resumo}[Abstract]
+[Insert here the English version of the abstract, summarizing the same key information as the Portuguese version.]
+
+\textbf{Keywords:} [Insert 3–5 relevant keywords in English.]
+\end{resumo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CORPO DO TEXTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textual
+
+\chapter{Introdução}
+[Apresente o contexto geral do tema, a relevância do trabalho, os objetivos e o problema abordado.]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Escopo e Objetivos}
+[Defina o escopo da análise e os objetivos específicos e gerais do relatório.]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Fundamentos Conceituais}
+[Apresente os conceitos teóricos, históricos ou técnicos que fundamentam o trabalho. 
+Inclua citações, definições e explicações sobre o tema principal.]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Metodologia}
+[Descreva a metodologia utilizada para conduzir o estudo, experimento ou análise. 
+Inclua técnicas, ferramentas, frameworks e critérios de avaliação utilizados.]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Análise Técnica ou Estudo de Caso}
+[Apresente o estudo prático, experimento ou investigação realizada. 
+Inclua figuras, gráficos, tabelas e explicações passo a passo.]
+
+\begin{figure}[H]
+    \centering
+    % Certifique-se que o arquivo 'exemplo.jpg' está na pasta 'media/'
+    % Comente esta linha se não tiver a imagem
+    % \includegraphics[width=0.8\textwidth]{exemplo.jpg}
+    \caption{[Legenda descritiva da imagem inserida.]}
+    \label{fig:exemplo}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Resultados e Discussão}
+[Explique os principais resultados obtidos e discuta seu significado, relacionando-os com os objetivos e a teoria apresentada.]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Conclusão}
+[Apresente as conclusões gerais, destacando os aprendizados e contribuições do trabalho. 
+Se aplicável, aponte limitações e possibilidades de estudos futuros.]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FAQ
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{faq}
+    \item[O que motivou este relatório?] [Insira uma resposta breve.]
+    \item[Quais ferramentas foram utilizadas?] [Liste e descreva resumidamente.]
+    \item[Como os resultados podem ser aplicados?] [Descreva aplicações práticas.]
+\end{faq}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APÊNDICES E ANEXOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\postextual
+
+% Inicia a seção de Apêndices
+\begin{apendices}
+
+\chapter{Material Complementar}
+[Inclua aqui imagens, tabelas, logs ou scripts complementares usados no trabalho.]
+
+\end{apendices}
+
+% Inicia o ambiente de Anexos
+\begin{anexos}
+
+\chapter{Documentos de Referência}
+[Anexe documentos ou registros relevantes que sustentem a análise.]
+
+\end{anexos}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FIM DO DOCUMENTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
